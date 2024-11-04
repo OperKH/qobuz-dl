@@ -239,6 +239,8 @@ class Download:
 
     @staticmethod
     def _get_filename_attr(artist, track_metadata, track_title):
+        version = track_metadata.get("version");
+        version_part=f" ({version})" if version else ""
         return {
             "artist": artist,
             "albumartist": _safe_get(
@@ -247,7 +249,8 @@ class Download:
             "bit_depth": track_metadata["maximum_bit_depth"],
             "sampling_rate": track_metadata["maximum_sampling_rate"],
             "tracktitle": track_title,
-            "version": track_metadata.get("version"),
+            "version": version,
+            "tracktitle_with_version": f"{track_title}{version_part}",
             "tracknumber": f"{track_metadata['track_number']:02}",
         }
 
